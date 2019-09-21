@@ -1,0 +1,12 @@
+years<-c(2015,2016)
+PCN <- c(16417.38,17416.17)
+Grey <- c(11323.16667,11364.28571)
+data <- data.frame(years,PCN,Grey)
+data$PCNvGrey <- data$PCN - data$Grey
+plotdata <- t(as.matrix(data[,c(3,4)]))
+fix(plotdata)
+barplot(plotdata,xlab = "years",ylab = "Price",ylim= c(0,20000))                                                      
+text(x = c(1,2),y=c(12000,12000),labels = Grey)
+text(x = c(1,2),y=c(17000,18000),labels = PCN)
+segments(x0 = 1.2,y0 = 11323.16667,x1 = 1.4,y1=11364.28571)
+segments(x0 = 1.2,y0 = 16417.38,x1 = 1.4,y1=17416.17)

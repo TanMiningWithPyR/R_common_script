@@ -1,0 +1,12 @@
+library(ggplot2)
+library(reshape2)
+ggplot <- read.csv("D:/system/Porsche/robbie/ggplot.csv", stringsAsFactors=FALSE)
+ggplot2 <- melt(data = ggplot,id="Brand")
+p <- ggplot(data = ggplot2,aes(x = variable,y = value,colour=Brand))
+Porsche <- subset(x = ggplot2,Brand=="Porsche")
+p_title <- p + geom_point(aes(shape = Brand),size=5) 
+p_title <- p_title + geom_line(data = Porsche,aes(x = variable,y=value,group=Brand))
+p_title <- p_title + labs(title="Performance Compare by Dimension",x="Dimension",y="score")
+p_title <- p_title + scale_y_continuous(label=c("20%","40%","60%","80%","100%"))
+
+p + geom_bar(stat="identity",width=.5)+facet_grid(Brand~.)
